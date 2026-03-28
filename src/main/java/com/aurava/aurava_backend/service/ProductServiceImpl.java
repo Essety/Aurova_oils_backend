@@ -54,6 +54,7 @@ public List<String> getAllCategories() {
 
     @Override
 public List<Product> getProductsByCategory(String category) {
+<<<<<<< HEAD
 
     String normalizedCategory = category
             .trim()
@@ -73,6 +74,9 @@ public List<Product> getProductsByCategory(String category) {
                 return dbCategory.equals(normalizedCategory);
             })
             .toList();
+=======
+    return productRepository.findByCategoryIgnoreCase(category);
+>>>>>>> 9f473d655c036311e34dcb3c4330d4f6cc7fea73
 }
 
 }
