@@ -9,4 +9,5 @@ public interface WishlistService {
     WishlistResponse addToWishlist(Long productId);
 
     void removeFromWishlist(Long itemId);
+    void clearWishlist();
 }

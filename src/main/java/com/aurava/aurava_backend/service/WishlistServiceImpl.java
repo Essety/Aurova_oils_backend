@@ -7,6 +7,7 @@ import com.aurava.aurava_backend.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -96,4 +97,19 @@ public class WishlistServiceImpl implements WishlistService {
 
         wishlistItemRepository.delete(item);
     }
+    
+@Transactional
+    @Override
+public void clearWishlist() {
+
+    User user = getLoggedUser();
+    Wishlist wishlist = getOrCreateWishlist(user);
+
+    // Delete all items of this wishlist
+    wishlistItemRepository.deleteAll(wishlist.getItems());
+
+    // Optional: clear in-memory list (good practice)
+    wishlist.getItems().clear();
+}
+
 }
